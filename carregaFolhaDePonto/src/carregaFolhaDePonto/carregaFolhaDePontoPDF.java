@@ -70,7 +70,7 @@ public class carregaFolhaDePontoPDF {
                         		}
                         		else {
                         			if (JaGraveiLancamentos = false) {
-                        				gravarBancoDeDadosLancamentosFunc(CsvLancamento);
+//                        				gravarBancoDeDadosLancamentosFunc(CsvLancamento);
                         				JaGraveiLancamentos = true;
                         			}
                         		}
