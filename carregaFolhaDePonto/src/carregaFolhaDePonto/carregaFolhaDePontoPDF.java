@@ -21,7 +21,8 @@ public class carregaFolhaDePontoPDF {
         boolean novoCartao = true; 
         boolean jaObtiveMesLancamentos, 
     	        jaObtiveDadosFuncionario, 
-    	        JaContabilizeiLancamentos;
+    	        JaContabilizeiLancamentos,
+    	        JaGraveiLancamentos;
         int cntLinhaCartao = 0, 
             mesCartaoLancamentos = 0,
             anoCartaoLancamentos = 0, 
@@ -67,12 +68,19 @@ public class carregaFolhaDePontoPDF {
                         			}
                         			JaContabilizeiLancamentos = true;
                         		}
+                        		else {
+                        			if (JaGraveiLancamentos = false) {
+                        				gravarBancoDeDadosLancamentosFunc(CsvLancamento);
+                        				JaGraveiLancamentos = true;
+                        			}
+                        		}
                         	}
                         }
                     } else {
                     	jaObtiveMesLancamentos = false;
                     	jaObtiveDadosFuncionario = false;
                     	JaContabilizeiLancamentos = false;
+                    	JaGraveiLancamentos = false;
                     	cntLinhaCartao = 1; 
                     	continue; 
                     }                    	
@@ -98,6 +106,12 @@ private static void contabilizaLancamentos(String dadosLancamentos) {
 	System.out.println(dadosLancamentos);
 }
 
+private static void gravarBancoDeDadosLancamentosFunc(Object CsvLancamento) {
+
+	//* O objetivo é gravar no banco de dados de lancamentos o objeto recebido
+	
+	System.out.println("Teste de Gravacao em Banco de Dados");
+}
 
 private static Integer ultimoDiaMesLancamento(Integer mesCartao, Integer anoCartao) {
 	
