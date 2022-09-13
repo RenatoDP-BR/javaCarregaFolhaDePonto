@@ -19,48 +19,47 @@ public class carregaFolhaDePontoPDF {
 	    String linha, 
 	           nomeFuncionario = "";
         boolean novoCartao = true; 
-        boolean jaObtiveMesLancamentos, 
-    	        jaObtiveDadosFuncionario, 
-    	        JaContabilizeiLancamentos,
-    	        JaGraveiLancamentos;
+        boolean jaObtiveMesLancamentos = false, 
+    	        jaObtiveDadosFuncionario = false, 
+    	        JaContabilizeiLancamentos = false,
+    	        JaGraveiLancamentos = false;
         int cntLinhaCartao = 0, 
             mesCartaoLancamentos = 0,
             anoCartaoLancamentos = 0, 
-            idFuncionario = 0;
+            idFuncionario = 0, 
+            indexFinal = 0, 
+            indexInicial = 0;
         
 	    	try (BufferedReader bufferArquivo = new BufferedReader(new InputStreamReader(new FileInputStream(arquivoCSV), "ISO-8859-1"))) {
 				while ((linha = bufferArquivo.readLine()) != null) {
 					
 					cntLinhaCartao++; 
 					
-			        int indexInicial = linha.indexOf("Cartão");
-			        int indexFinal = linha.indexOf("Ponto")+5;
 			        System.out.println("Linha " + cntLinhaCartao + " do Cartao de Ponto:" + linha);
-			        String variavel = linha.substring(indexInicial, indexFinal);
-                    if (variavel != "Cartão de Ponto") {
-                        if (jaObtiveMesLancamentos = false &
+                    if (!linha.contentEquals("Cartão de Ponto,,,,,,,,,,,")) {
+                        if (jaObtiveMesLancamentos == false &
                            cntLinhaCartao == 2) {
-                        	System.out.println("Mes do Cartao de Ponto:" + linha.substring(12, 13));
-                        	System.out.println("Ano do Cartao de Ponto:" + linha.substring(15, 18));
-                        	mesCartaoLancamentos = Integer.parseInt(linha.substring(12, 13));
-                        	anoCartaoLancamentos = Integer.parseInt(linha.substring(15, 18));
+                        	System.out.println("Mes do Cartao de Ponto:" + linha.substring(12, 14));
+                        	System.out.println("Ano do Cartao de Ponto:" + linha.substring(15, 19));
+                        	mesCartaoLancamentos = Integer.parseInt(linha.substring(12, 14));
+                        	anoCartaoLancamentos = Integer.parseInt(linha.substring(15, 19));
                         	jaObtiveMesLancamentos = true;
                         	continue;
                         }
                         else {
-                        	if (jaObtiveDadosFuncionario = false &
+                        	if (jaObtiveDadosFuncionario == false &
                                 cntLinhaCartao == 6) {
             			        indexFinal = linha.indexOf("-");
                             	System.out.println("Id do Funcionario:" + linha.substring(0, indexFinal - 1));
                             	idFuncionario = Integer.parseInt(linha.substring(0, indexFinal - 1));
             			        indexInicial = linha.indexOf("-");
             			        indexFinal = linha.indexOf(",");
-            			        nomeFuncionario = linha.substring(indexInicial, indexFinal);
+            			        nomeFuncionario = linha.substring(indexInicial+2, indexFinal);
             			        jaObtiveDadosFuncionario = true;
                             	continue;
                         	} 
                         	else {
-                        		if (JaContabilizeiLancamentos = false &
+                        		if (JaContabilizeiLancamentos == false &
                                     cntLinhaCartao >= 12) {
                         			for (int diaMesLancamento = 1; diaMesLancamento < ultimoDiaMesLancamento(mesCartaoLancamentos, anoCartaoLancamentos)+1; diaMesLancamento++) {
                         				  
@@ -69,7 +68,8 @@ public class carregaFolhaDePontoPDF {
                         			JaContabilizeiLancamentos = true;
                         		}
                         		else {
-                        			if (JaGraveiLancamentos = false) {
+                        			if (JaContabilizeiLancamentos == true &
+                        				JaGraveiLancamentos == false) {
 //                        				gravarBancoDeDadosLancamentosFunc(CsvLancamento);
                         				JaGraveiLancamentos = true;
                         			}
