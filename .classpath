@@ -7,5 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/renat/eclipse-workspace/BibliotecasExternas/opencsv-4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/renat/eclipse-workspace/BibliotecasExternas/lombok.jar"/>
 	<classpathentry kind="output" path="carregaFolhaDePonto/bin"/>
 </classpath>

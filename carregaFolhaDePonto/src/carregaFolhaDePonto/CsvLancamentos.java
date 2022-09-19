@@ -1,21 +1,31 @@
 package carregaFolhaDePonto;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+
 public class CsvLancamentos {
 
-    private String dataEDiaLançamento;
+    private LocalDate dataLançamento;
+    private String diaDaSemana; 
     private String tipoDeDiaLançamento;
-    private String entrada1Lançamento;
-    private String saida1Lançamento;
-    private String entrada2Lançamento;
-    private String saida2Lançamento;
-    private String entrada3Lançamento;
-    private String saida3Lançamento;
-    private String entrada4Lançamento;
-    private String saida4Lançamento;
-    private Integer qtdeHorasLançamento;
+    private LocalTime entrada1Lançamento;
+    private LocalTime saida1Lançamento;
+    private LocalTime entrada2Lançamento;
+    private LocalTime saida2Lançamento;
+    private LocalTime entrada3Lançamento;
+    private LocalTime saida3Lançamento;
+    private LocalTime entrada4Lançamento;
+    private LocalTime saida4Lançamento;
+    private LocalTime qtdeHorasLançamento;
     private String ocorrJustLançamento;
-
-    // Gets e Sets omitidos para ficar menor
-
-	
+    
 }
